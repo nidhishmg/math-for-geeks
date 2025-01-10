@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permutation and Combination Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result-container {
+            margin-top: 20px;
+        }
+        .perm-comb-result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .perm-comb-result th, .perm-comb-result td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Permutation and Combination Calculator</h1>
+    <label for="n">Enter n (total items):</label>
+    <input type="number" id="n" placeholder="Enter n" required>
+    <br>
+    <label for="r">Enter r (items chosen):</label>
+    <input type="number" id="r" placeholder="Enter r" required>
+    <br>
+    <button onclick="calculatePermComb()">Calculate Permutation & Combination</button>
+
+    <div id="result" class="result-container"></div>
+
+    <script>
+        function calculatePermComb() {
+            const n = document.getElementById('n').value;
+            const r = document.getElementById('r').value;
+            const resultDiv = document.getElementById('result');
+
+            // Check if inputs are valid
+            if (n === '' || r === '') {
+                alert('Please enter both n and r values.');
+                return;
+            }
+
+            if (n < r) {
+                alert('n should be greater than or equal to r.');
+                return;
+            }
+
+            // Factorial function
+            function factorial(num) {
+                if (num === 0 || num === 1) {
+                    return 1;
+                }
+                return num * factorial(num - 1);
+            }
+
+            // Permutation P(n, r) = n! / (n - r)!
+            const permutation = factorial(n) / factorial(n - r);
+
+            // Combination C(n, r) = n! / (r! * (n - r)!)
+            const combination = factorial(n) / (factorial(r) * factorial(n - r));
+
+            // Display the result
+            let resultHTML = `<h2>Permutation and Combination Results</h2>`;
+            resultHTML += '<table class="perm-comb-result"><thead><tr><th>Formula</th><th>Result</th></tr></thead><tbody>';
+            resultHTML += `<tr><td>P(${n}, ${r})</td><td>${permutation}</td></tr>`;
+            resultHTML += `<tr><td>C(${n}, ${r})</td><td>${combination}</td></tr>`;
+            resultHTML += '</tbody></table>';
+
+            resultDiv.innerHTML = resultHTML;
+        }
+    </script>
+
+</body>
+</html>

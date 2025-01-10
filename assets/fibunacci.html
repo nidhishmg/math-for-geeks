@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci Series Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result-container {
+            margin-top: 20px;
+        }
+        .fibonacci-result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .fibonacci-result th, .fibonacci-result td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Fibonacci Series Generator</h1>
+    <label for="limit">Enter the limit:</label>
+    <input type="number" id="limit" placeholder="Enter the limit" required>
+    <br>
+    <button onclick="generateFibonacci()">Generate Fibonacci Series</button>
+
+    <div id="result" class="result-container"></div>
+
+    <script>
+        function generateFibonacci() {
+            const limit = document.getElementById('limit').value;
+            const resultDiv = document.getElementById('result');
+
+            // Check if the input is valid
+            if (limit === '') {
+                alert('Please enter a limit.');
+                return;
+            }
+
+            if (limit <= 0) {
+                alert('Please enter a positive number.');
+                return;
+            }
+
+            // Generate the Fibonacci series
+            let fibSeries = [0, 1];
+            for (let i = 2; i < limit; i++) {
+                fibSeries.push(fibSeries[i - 1] + fibSeries[i - 2]);
+            }
+
+            // Display the result
+            let resultHTML = `<h2>Fibonacci Series up to ${limit} terms</h2>`;
+            resultHTML += '<table class="fibonacci-result"><thead><tr><th>Index</th><th>Value</th></tr></thead><tbody>';
+            for (let i = 0; i < limit; i++) {
+                resultHTML += `<tr><td>${i + 1}</td><td>${fibSeries[i]}</td></tr>`;
+            }
+            resultHTML += '</tbody></table>';
+
+            resultDiv.innerHTML = resultHTML;
+        }
+    </script>
+
+</body>
+</html>

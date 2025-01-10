@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+        .power-table {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .power-table th, .power-table td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Power Calculator</h1>
+    <label for="base">Enter base (n):</label>
+    <input type="number" id="base" placeholder="Enter a natural number" required>
+    <br>
+    <label for="power">Enter power (x):</label>
+    <input type="number" id="power" placeholder="Enter the power" required>
+    <br>
+    <button onclick="generatePowers()">Calculate Powers</button>
+
+    <div id="result" class="table-container"></div>
+
+    <script>
+        function generatePowers() {
+            const base = document.getElementById('base').value;
+            const power = document.getElementById('power').value;
+            const resultDiv = document.getElementById('result');
+
+            // Check if inputs are provided and valid
+            if (base === '' || power === '') {
+                alert('Please enter both base and power values.');
+                return;
+            }
+
+            if (base <= 0 || power <= 0) {
+                alert('Please enter natural numbers for base and power.');
+                return;
+            }
+
+            // Generate the powers
+            let tableHTML = `<h2>Powers of ${base} raised to powers up to ${power}</h2>`;
+            tableHTML += '<table class="power-table"><thead><tr><th>Power (x)</th><th>Result (n^x)</th></tr></thead><tbody>';
+            for (let i = 1; i <= power; i++) {
+                tableHTML += `<tr><td>${base}^${i}</td><td>${Math.pow(base, i)}</td></tr>`;
+            }
+            tableHTML += '</tbody></table>';
+
+            // Display the table
+            resultDiv.innerHTML = tableHTML;
+        }
+    </script>
+
+</body>
+</html>
