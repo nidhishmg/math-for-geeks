@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+        .multiplication-table {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .multiplication-table th, .multiplication-table td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Multiplication Table Generator</h1>
+    <label for="number">Enter a number:</label>
+    <input type="number" id="number" placeholder="Enter a number" required>
+    <button onclick="generateTable()">Generate Table</button>
+
+    <div id="result" class="table-container"></div>
+
+    <script>
+        function generateTable() {
+            const number = document.getElementById('number').value;
+            const resultDiv = document.getElementById('result');
+            
+            // Check if the number is provided
+            if (number === '') {
+                alert('Please enter a number.');
+                return;
+            }
+
+            // Generate the multiplication table
+            let tableHTML = `<h2>Multiplication Table for ${number}</h2>`;
+            tableHTML += '<table class="multiplication-table"><thead><tr><th>Multiplier</th><th>Result</th></tr></thead><tbody>';
+            for (let i = 1; i <= 40; i++) {
+                tableHTML += `<tr><td>${number} x ${i}</td><td>${number * i}</td></tr>`;
+            }
+            tableHTML += '</tbody></table>';
+            
+            // Display the table
+            resultDiv.innerHTML = tableHTML;
+        }
+    </script>
+
+</body>
+</html>
